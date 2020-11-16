@@ -8,10 +8,11 @@ The Ip address and portnumber can be changed in the python script
 
 ## Manual Installation
 
+```
 pip install -r requirements.txt
 mkdir -p /usr/lib/systemd/system
 cp bpvalidate-exporter.service /usr/lib/systemd/system
 useradd prometheus
 systemctl enable bpvalidate-exporter
 systemctl start bpvalidate-exporter
-
+```
