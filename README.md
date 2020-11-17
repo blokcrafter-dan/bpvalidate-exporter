@@ -15,6 +15,7 @@ cp bpvalidate-exporter.service /usr/lib/systemd/system
 useradd prometheus
 systemctl enable bpvalidate-exporter
 systemctl start bpvalidate-exporter
+```
 
 ## Usage
 
@@ -22,7 +23,8 @@ systemctl start bpvalidate-exporter
 bpvalidate-export.py -p <export port> -n <EOSIO chain> -u <source bp.json uri> -r <fetch refresh in seconds>
 ```
 
-Defaults are:
+## Defaults
+
 ```
 PORT 8000
 NETWORK eos
