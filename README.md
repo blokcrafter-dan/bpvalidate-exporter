@@ -28,6 +28,8 @@ bpvalidate-export.py <options>
     -r, --refresh=<fetch refresh in seconds>
 ```
 
+Note: you do not need to specify the URI, it will auto-set it based on the provided network parameter
+
 ## Defaults
 
 ```
