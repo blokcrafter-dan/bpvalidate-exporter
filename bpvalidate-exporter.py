@@ -27,7 +27,7 @@ class CustomCollector(object):
           bps = requests.get( url = VALIDATE_URL ).json()
           val_prod = len(bps['producers'])
           g = GaugeMetricFamily("eosn_producers", 'total producers', labels=['chain'])
-          g.add_metric(["EOS"], val_prod)
+          g.add_metric([NETWORK], val_prod)
           
           producer_active = GaugeMetricFamily("eosn_producer_active", 'producer is_active', labels=['chain','owner'])
           producer_votes  = GaugeMetricFamily("eosn_producer_votes", 'producer votes', labels=['chain','owner'])
@@ -36,12 +36,12 @@ class CustomCollector(object):
           x=0
           while (x < val_prod):
             val_owner = bps['producers'][x]['regproducer']['owner']
-            producer_active.add_metric(['EOS',val_owner], float(bps['producers'][x]['regproducer']['is_active']))
-            producer_votes.add_metric(['EOS',val_owner], float(bps['producers'][x]['regproducer']['total_votes']))
-            producer_unpaid_blocks.add_metric(['EOS',val_owner], float(bps['producers'][x]['regproducer']['unpaid_blocks']))
+            producer_active.add_metric([NETWORK,val_owner], float(bps['producers'][x]['regproducer']['is_active']))
+            producer_votes.add_metric([NETWORK,val_owner], float(bps['producers'][x]['regproducer']['total_votes']))
+            producer_unpaid_blocks.add_metric([NETWORK,val_owner], float(bps['producers'][x]['regproducer']['unpaid_blocks']))
             
             for val_cat in bps['producers'][x]['message_summary']:
-              producer_categories.add_metric(['EOS',val_owner,val_cat],KIND_TYPES.index(bps['producers'][x]['message_summary'][val_cat]))
+              producer_categories.add_metric([NETWORK,val_owner,val_cat],KIND_TYPES.index(bps['producers'][x]['message_summary'][val_cat]))
             x+=1
 
           yield producer_active
