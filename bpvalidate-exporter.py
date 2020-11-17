@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 """
     This exporter converts eosnation validation json.
 """
@@ -8,12 +8,14 @@ __created__     = ""
 __revision__    = ""
 __date__        = ""
 
-import requests, json, time, os, sys, traceback
+import requests, json, time, os, sys, traceback, getopt
 from prometheus_client.core import REGISTRY, GaugeMetricFamily
 from prometheus_client import start_http_server
 
-EOSN_VALIDATE_URL='https://validate.eosnation.io/eos/bps.json'
-EOSN_INTERNAL='https://validate.eosnation.io/eos/producers/eosnationftw.json'
+PORT=8000
+NETWORK='eos'
+REFRESH=300
+VALIDATE_URL='https://validate.eosnation.io/eos/bps.json'
 KIND_TYPES=['ok','info','skip','warn','err','crit']
 
 class CustomCollector(object):
@@ -22,7 +24,7 @@ class CustomCollector(object):
 
     def collect(self):
         try:
-          bps = requests.get( url = EOSN_VALIDATE_URL ).json()
+          bps = requests.get( url = VALIDATE_URL ).json()
           val_prod = len(bps['producers'])
           g = GaugeMetricFamily("eosn_producers", 'total producers', labels=['chain'])
           g.add_metric(["EOS"], val_prod)
@@ -53,7 +55,32 @@ class CustomCollector(object):
 
 
 if __name__ == '__main__':
-    start_http_server(8000)
+
+    try:
+        opts, args = getopt.getopt(sys.argv[1:], "p:n:u:r:h", ["help", "port=", "network=","uri=","refresh="])
+    except getopt.error as msg:
+        print(msg)
+        sys.exit("Invalid arguments.")
+
+    for o, a in opts:
+        if o in ("-h", "--help"):
+          print("Usage: bpvalidate-export.py -p <export port> -n <EOSIO chain> -u <source bp.json uri> -r <fetch refresh in seconds>")
+          sys.exit()
+
+        if o in ("-p", "--port"):
+          PORT=int(a)
+
+        if o in ("-n", "--network"):
+          NETWORK=str(a)
+
+        if o in ("-r", "--refresh"):
+          REFRESH=int(a)
+
+        if o in ("-u", "--uri"):
+          VALIDATE_URL=str(a)
+
+    print("Starting exporter on port %.0f for network %s , fetching every %.0fs from %s"%(PORT,NETWORK,REFRESH,VALIDATE_URL))
+    start_http_server(PORT)
     REGISTRY.register(CustomCollector())
     while True:
-        time.sleep(300)
+        time.sleep(REFRESH)
