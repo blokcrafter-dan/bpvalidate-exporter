@@ -20,7 +20,12 @@ systemctl start bpvalidate-exporter
 ## Usage
 
 ```
-bpvalidate-export.py -p <export port> -n <EOSIO chain> -u <source bp.json uri> -r <fetch refresh in seconds>
+bpvalidate-export.py <options>
+  options are:
+    -p, --port=<export port> 
+    -n, --network=<EOSIO chain> 
+    -u, --uri=<source bp.json uri>
+    -r, --refresh=<fetch refresh in seconds>
 ```
 
 ## Defaults
