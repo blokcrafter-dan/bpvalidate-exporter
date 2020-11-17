@@ -72,6 +72,7 @@ if __name__ == '__main__':
 
         if o in ("-n", "--network"):
           NETWORK=str(a)
+          VALIDATE_URL= "https://validate.eosnation.io/%s/bps.json"%NETWORK
 
         if o in ("-r", "--refresh"):
           REFRESH=int(a)
