@@ -38,3 +38,25 @@ NETWORK eos
 REFRESH 300
 URI https://validate.eosnation.io/eos/bps.json
 ```
+
+## Example Output
+
+```
+eosn_producer_active{chain="eos",owner="eosnationftw"} 1.0
+eosn_producer_votes{chain="eos",owner="eosnationftw"} 6.01561876587203e+18
+eosn_producer_unpaid_blocks{chain="eos",owner="eosnationftw"} 5556.0
+eosn_producer_top21{chain="eos",owner="eosnationftw"} 1.0
+eosn_producer_is_paid{chain="eos",owner="eosnationftw"} 1.0
+eosn_producer_is_standby{chain="eos",owner="eosnationftw"} 0.0
+eosn_producer_categories{category="api_endpoint",chain="eos",owner="eosnationftw"} 0.0
+eosn_producer_categories{category="blacklist",chain="eos",owner="eosnationftw"} 0.0
+eosn_producer_categories{category="bpjson",chain="eos",owner="eosnationftw"} 0.0
+eosn_producer_categories{category="chains",chain="eos",owner="eosnationftw"} 0.0
+eosn_producer_categories{category="general",chain="eos",owner="eosnationftw"} 1.0
+eosn_producer_categories{category="history",chain="eos",owner="eosnationftw"} 5.0
+eosn_producer_categories{category="hyperion",chain="eos",owner="eosnationftw"} 5.0
+eosn_producer_categories{category="org",chain="eos",owner="eosnationftw"} 0.0
+eosn_producer_categories{category="p2p_endpoint",chain="eos",owner="eosnationftw"} 0.0
+eosn_producer_categories{category="regproducer",chain="eos",owner="eosnationftw"} 0.0
+eosn_producer_categories{category="wallet",chain="eos",owner="eosnationftw"} 0.0
+```
