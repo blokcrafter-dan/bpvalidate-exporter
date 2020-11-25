@@ -59,10 +59,11 @@ class CustomCollector(object):
           yield producer_is_standby
           yield producer_categories
           yield g
+          yield GaugeMetricFamily('eosn_producer_up', 'eosn producer scrape success',1)
             
         except:
           traceback.print_exc()
-
+          yield GaugeMetricFamily('eosn_producer_up', 'eosn producer scrape success',0)
 
 if __name__ == '__main__':
 
