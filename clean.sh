@@ -6,7 +6,8 @@ cd "${DIR}"
 
 ./stop.sh
 
-docker rmi bpvalidate-exporter
+docker rmi bpvalidate-wax
+docker rmi bpvalidate-waxtest
 docker rmi python:3.9
 
 cd "${starting_dir}"
