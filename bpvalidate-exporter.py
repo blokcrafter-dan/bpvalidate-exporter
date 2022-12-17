@@ -91,7 +91,7 @@ if __name__ == '__main__':
         if o in ("-u", "--uri"):
           VALIDATE_URL=str(a)
 
-    print("Starting exporter on port %.0f for network %s , fetching every %.0fs from %s"%(PORT,NETWORK,REFRESH,VALIDATE_URL))
+    print("Starting exporter on port %.0f for network %s , fetching every %.0fs from %s"%(PORT,NETWORK,REFRESH,VALIDATE_URL), flush=True)
     start_http_server(PORT)
     REGISTRY.register(CustomCollector())
     while True:
